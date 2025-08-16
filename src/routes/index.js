@@ -1,14 +1,15 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const InfoController = require('../controllers/InfoController')
+// Route test
+router.get("/data", (req, res) => {
+  res.json({ message: "Hello from backend API 🎉" });
+});
 
-// router test
-router.get('/', (req, res) => {
-    res.json({ message: 'API root' })
-})
+// Route nhận dữ liệu (POST từ ESP hoặc client)
+router.post("/data", (req, res) => {
+  console.log("Dữ liệu nhận:", req.body);
+  res.json({ success: true, data: req.body });
+});
 
-// Route nhận dữ liệu từ Micropython
-router.post('/data', InfoController.receiveData);
-
-module.exports = router
+module.exports = router;

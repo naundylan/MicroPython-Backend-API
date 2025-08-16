@@ -1,19 +1,22 @@
-// src/index.js
-const express = require('express')
-const app = express()
-const port = 3000
-const apiRoutes = require('./routes')
+const express = require("express");
+const cors = require("cors");
+const routes = require("./routes");
 
-// middleware
-app.use(express.json())
+const app = express();
+const port = process.env.PORT || 3000;
 
-// route
-app.get('/', (req, res) => {
-    res.send("Đây là trang chủ nha!")
-})
+app.use(cors());
+app.use(express.json());
 
-app.use('/api', apiRoutes)
+// Import route
+app.use("/api", routes);
+
+app.get("/", (req, res) => {
+  res.send("Backend API is running 🚀");
+});
 
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });
+
+module.exports = app;
