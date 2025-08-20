@@ -11,6 +11,10 @@ router.get('/api', (req, res) => {
   res.send('API endpoint is working');
 });
 
+router.get('/api/data', (req, res) => {
+  res.send('api/data is working');
+});
+
 router.post('/api/data', InfoController.receiveData);
 
 module.exports = router;
