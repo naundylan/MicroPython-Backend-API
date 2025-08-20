@@ -4,7 +4,7 @@ const routes = require("./routes");
 const app = express();
 
 app.use(express.json());
-app.use("/api", routes);
+app.use("/", routes);
 
 // Khi chạy local thì listen
 if (require.main === module) {
