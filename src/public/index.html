@@ -11,7 +11,7 @@
 
   <script>
     // Kết nối tới server (local hoặc vercel)
-    const socket = io("http://localhost:3000"); 
+    const socket = io("https://iotgreenhouse.vercel.app"); 
     // Nếu deploy thì đổi thành: io("https://ten-mien-cua-ban.vercel.app");
 
     // Lắng nghe dữ liệu từ server
@@ -25,7 +25,7 @@
     });
 
     // Test: gọi API lấy toàn bộ dữ liệu đã lưu
-    fetch("http://localhost:3000/api/data")
+    fetch("https://iotgreenhouse.vercel.app/api/data")
       .then(res => res.json())
       .then(history => {
         history.forEach(d => {
