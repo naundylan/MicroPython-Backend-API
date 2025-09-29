@@ -15,6 +15,7 @@ router.get('/api', (req, res) => {
 let sensorData = []
 router.post('/api/data', (req, res) => {
   const data = req.body;
+  if (sensorData.length > 1000) sensorData.shift();
   sensorData.push({ ...data, time: new Date() });
   console.log("Nhận dữ liệu: ", data);
   
@@ -27,6 +28,10 @@ router.post('/api/data', (req, res) => {
 
 router.get('/api/data', (req, res) => {
   res.json(sensorData);
+});
+
+router.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 module.exports = router;

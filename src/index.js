@@ -4,6 +4,7 @@ const socketIo = require("socket.io");
 const routes = require("./routes");
 
 const app = express();
+app.use(express.static("public"));
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Realtime Sensor Data</title>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Dữ liệu cảm biến realtime</h1>
+  <ul id="data-list"></ul>
+
+  <script>
+    // Kết nối tới server (local hoặc vercel)
+    const socket = io("http://localhost:3000"); 
+    // Nếu deploy thì đổi thành: io("https://ten-mien-cua-ban.vercel.app");
+
+    // Lắng nghe dữ liệu từ server
+    socket.on("new-data", (data) => {
+      console.log("📡 Nhận dữ liệu:", data);
+      
+      // Hiển thị ra màn hình
+      const li = document.createElement("li");
+      li.textContent = JSON.stringify(data);
+      document.getElementById("data-list").appendChild(li);
+    });
+
+    // Test: gọi API lấy toàn bộ dữ liệu đã lưu
+    fetch("http://localhost:3000/api/data")
+      .then(res => res.json())
+      .then(history => {
+        history.forEach(d => {
+          const li = document.createElement("li");
+          li.textContent = "[Lịch sử] " + JSON.stringify(d);
+          document.getElementById("data-list").appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
