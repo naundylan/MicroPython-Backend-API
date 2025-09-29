@@ -11,11 +11,22 @@ router.get('/api', (req, res) => {
   res.send('API endpoint is working');
 });
 
-router.get('/api/data', (req, res) => {
-  res.json({ message: "This is the data endpoint" });
+
+let sensorData = []
+router.post('/api/data', (req, res) => {
+  const data = req.body;
+  sensorData.push({ ...data, time: new Date() });
+  console.log("Nhận dữ liệu: ", data);
   
+  // Emit dữ liệu realtime qua socket.io
+  const io = req.app.get("io");
+  io.emit("new-data", data);
+  
+  res.json({ status: 'success', received: data });
 });
 
-router.post('/api/data', InfoController.receiveData);
+router.get('/api/data', (req, res) => {
+  res.json(sensorData);
+});
 
 module.exports = router;
