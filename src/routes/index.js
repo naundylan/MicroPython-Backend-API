@@ -12,8 +12,8 @@ router.get('/api', (req, res) => {
 });
 
 router.get('/api/data', (req, res) => {
-  const data = req.body;
-  res.json({ message: "Data received", data });
+  res.json({ message: "This is the data endpoint" });
+  
 });
 
 router.post('/api/data', InfoController.receiveData);
